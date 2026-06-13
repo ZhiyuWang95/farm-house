@@ -11,6 +11,12 @@
 - **Prep window**: Jun 10 - Jul 5 (~26 days)
 - **Time budget**: 2-4 hrs weekdays, 5-6 hrs weekends (~20-32 hrs/week)
 
+> **Note**: A second process (Cloud AI / Vertex MaaS, see `../cloud-ai-maas/`) is
+> running in parallel and its 2-round loop (1 coding + 1 system design) is being
+> proposed for Tuesday Jul 7 — making Jul 6-10 a 6-interview week across two
+> processes. Coding prep is fully shared; system design practice below should
+> include MaaS-flavored prompts (`../cloud-ai-maas/design/maas_design_topics.md`).
+
 ## Starting confidence (self-rated /5)
 | Area | Rating | Notes |
 |---|---|---|
@@ -41,6 +47,7 @@ node affinity/taints, what logs/tools you used, etc.).
 - [ ] Arrays/Strings/Hashmaps — two pointers, sliding window (4-6 problems)
 - [ ] Linked Lists, Stacks/Queues, Binary Search
 - [ ] Trees, BFS/DFS, intro to 1D DP
+- [ ] +1 OOD/class-design problem per day (see `coding/problem_list.md` — OOD track)
 
 ### K8s (3 sessions, ~45-60 min)
 - [ ] Control plane architecture refresh: API server, etcd, scheduler, controller manager
@@ -67,6 +74,7 @@ node affinity/taints, what logs/tools you used, etc.).
 - [ ] Graphs: BFS/DFS, topological sort, Union-Find
 - [ ] DP: 2D, knapsack patterns
 - [ ] Heaps/Priority Queues, Greedy
+- [ ] +1 OOD/class-design problem per day (see `coding/problem_list.md` — OOD track)
 - [ ] 1 mock coding interview (end of week)
 
 ### K8s (2-3 sessions)
@@ -91,6 +99,7 @@ node affinity/taints, what logs/tools you used, etc.).
 
 ### Coding (daily, timed)
 - [ ] Mixed-topic mediums + occasional hard
+- [ ] +1 OOD/class-design problem per day (see `coding/problem_list.md` — OOD track)
 - [ ] 2 mock coding interviews
 
 ### K8s (2 sessions)
@@ -103,6 +112,7 @@ node affinity/taints, what logs/tools you used, etc.).
 
 ### System Design (1-2 sessions)
 - [ ] 1-2 more designs, mock + feedback
+- [ ] Include ≥1 MaaS-flavored design prompt from `../cloud-ai-maas/design/maas_design_topics.md`
 
 ### Behavioral (1 session)
 - [ ] Full mock behavioral interview

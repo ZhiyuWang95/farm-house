@@ -71,3 +71,39 @@ logs. Classic "operator exists but does nothing" symptom, distinct from the
   endpoints, but **not** restarted
 - Mnemonic: *readiness = ready for traffic (routing); liveness = is it alive
   (restarts)*
+
+---
+
+## Imperative vs Declarative commands
+
+- **Imperative**: tell `kubectl` the exact *action* to take, right now, via CLI
+  flags — `kubectl create deployment nginx --image=nginx`,
+  `kubectl scale deployment nginx --replicas=3`, `kubectl delete pod mypod`.
+  Directly mutates the live object. Quick for debugging/ad-hoc ops, but **not
+  idempotent** (re-running `create` errors the second time) and not reproducible
+  (nothing saved except shell history).
+- **Declarative**: write the *desired end state* as YAML, apply it with
+  `kubectl apply -f file.yaml`. `apply` diffs live state vs. the file and does
+  whichever create/patch/no-op is needed. **Idempotent** — re-running with no
+  changes is a no-op. This is what makes GitOps possible (tools like ArgoCD just
+  keep re-applying a repo's manifests).
+
+| | Imperative | Declarative |
+|---|---|---|
+| You specify | the action (create/scale/delete) | the end state |
+| Idempotent? | No — re-running can error | Yes — converges, no-op if unchanged |
+| Source of truth | shell history (none, really) | YAML files (version-controllable) |
+| Typical use | quick testing, one-off fixes | production, CI/CD, GitOps |
+
+**3-way merge subtlety**: `apply` stores a
+`kubectl.kubernetes.io/last-applied-configuration` annotation on the object and
+diffs live vs. last-applied vs. new file. Mixing imperative edits (`kubectl edit`,
+`kubectl scale`) with `apply`-managed objects is discouraged — imperative changes
+aren't reflected in that annotation, so the next `apply` can silently revert them.
+
+**Mapped onto Joey's platform**: the `PlutoService` **CRD** is applied
+declaratively (one-time, `kubectl apply -f pluto_service.yaml`). The CR
+*instances* are likely created via API calls from the frontend when a user
+configures their endpoint — conceptually "imperative" in spirit (a direct
+create/update action triggered by a user action), even though it goes through the
+API server like everything else rather than a raw `kubectl` command.
