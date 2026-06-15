@@ -30,9 +30,9 @@ point for the system design and infra-experience rounds.
   - *Real-world angle*: the building block under an informer's local object cache (lookup a K8s object by UID without hitting the API server).
 
 ### Day 3 — Arrays
-- [ ] [3Sum](https://leetcode.com/problems/3sum/) (Medium) — Two Pointers
-- [ ] [Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/) (Medium) — Prefix/Suffix
-- [ ] [Design HashMap](https://leetcode.com/problems/design-hashmap/) (Medium) — OOD
+- [x] [3Sum](https://leetcode.com/problems/3sum/) (Medium) — Two Pointers
+- [x] [Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/) (Medium) — Prefix/Suffix
+- [x] [Design HashMap](https://leetcode.com/problems/design-hashmap/) (Medium) — OOD
   - *Real-world angle*: the building block under etcd's key-value store (bucket/chain or open-addressing — same tradeoffs as etcd's backend storage).
 
 ### Day 4 — Linked Lists
