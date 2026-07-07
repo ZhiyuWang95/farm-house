@@ -23,12 +23,15 @@
 | Coding/Algorithms | 1.5 | Python, knows concepts but rusty, target medium+ |
 | System Design | 3.5 | solid foundation |
 | K8s | 2 | hands-on before, not recently. HM flagged etcd/internals debugging |
-| AI/ML Infra | 3 | inference systems, dataloaders, large-scale inference libs. HM flagged multi-GPU LLM sharding |
+| AI/ML Infra | 3 | inference systems, dataloaders, large-scale inference libs. **Not a GKE round** — relevant only to the parallel Vertex MaaS system-design round (see note below) |
 | Behavioral | 4 | strong |
 
+## Confirmed GKE round structure (as of 2026-06-21)
+**5 rounds**: 2 coding, 1 K8s knowledge, 1 system design, 1 behavioral. No standalone AI/ML Infra round.
+
 ## Hiring Manager Signals
-- Deep K8s knowledge required — debugging etcd / internal K8s components
-- Asked about sharding a large LLM across multiple GPUs (model/tensor parallelism) — candidate noted this as a gap
+- Deep K8s knowledge required — debugging etcd / internal K8s components — covered in the **K8s knowledge** round.
+- Asked about sharding a large LLM across multiple GPUs (model/tensor parallelism) — candidate noted this as a gap. **This is not part of the GKE K8s round.** It's prep surface for the parallel **Vertex MaaS** process's system-design round instead — keep it in System Design sessions, not K8s sessions.
 
 ## Note on "Infrastructure/Kubernetes background and experience" round
 Round 4 was renamed from "K8s context" to this — likely a resume/experience deep-dive
@@ -41,88 +44,59 @@ node affinity/taints, what logs/tools you used, etc.).
 
 ---
 
-## Week 1 (Jun 10 - Jun 16): Foundations & Diagnostics
+## Revised compressed plan (as of 2026-06-21)
 
-### Coding (daily, ~45-90 min, untimed — focus on pattern recognition)
-- [ ] Arrays/Strings/Hashmaps — two pointers, sliding window (4-6 problems)
-- [ ] Linked Lists, Stacks/Queues, Binary Search
-- [ ] Trees, BFS/DFS, intro to 1D DP
-- [ ] +1 OOD/class-design problem per day (see `coding/problem_list.md` — OOD track)
+Original plan assumed ~20-32 hrs/week; actual available time is **2 hrs/weekday,
+3-4 hrs/weekend** — only ~37.5 hrs total remain between today and 7/5. Re-prioritized
+by round weight (coding = 2 of 5 GKE rounds, 40%) and confidence gap (coding 1.5/5,
+weakest). AI/ML Infra is **not** a GKE round — it only shows up inside System Design
+sessions (serves both GKE's design round and the likely Vertex MaaS design round).
 
-### K8s (3 sessions, ~45-60 min)
-- [ ] Control plane architecture refresh: API server, etcd, scheduler, controller manager
+**Progress so far**: Coding Day 1-3 done (`coding/problem_list.md`); K8s control-plane
+basics (API server, etcd, scheduler/controller-manager split) covered in
+`domain_knowledge/k8s_course_notes.md`. System Design, AI/ML, Behavioral: not started.
+
+### Day-by-day: coding every other weekday (A), K8s + rotating partner the other (B)
+| Date | Day | Focus |
+|---|---|---|
+| 6/22 Mon | A | Coding (full 2h — 1-2 timed problems + review) |
+| 6/23 Tue | B | K8s (1h) + System Design review (1h) |
+| 6/24 Wed | A | Coding |
+| 6/25 Thu | B | K8s (1h) + Behavioral (1h) |
+| 6/26 Fri | A | Coding |
+| 6/27 Sat (3-4h) | — | System Design — full mock + feedback, include an AI/ML/MaaS-flavored prompt |
+| 6/28 Sun (3-4h) | — | Coding mock (~1.5h) + Behavioral or K8s mock, rotating (~1.5-2h) |
+| 6/29 Mon | A | Coding |
+| 6/30 Tue | B | K8s (1h) + System Design review (1h) |
+| 7/1 Wed | A | Coding |
+| 7/2 Thu | B | K8s (1h) + Behavioral (1h) |
+| 7/3 Fri | A | Coding |
+| 7/4 Sat | — | Taper — light review only; 1 more System Design mock only if a real gap remains |
+| 7/5 Sun | — | Taper — light review only, no new content, re-read STAR stories, rest |
+| 7/6 Mon | — | **Interview Day 1 — Coding #1** |
+
+### Checklist by area
+**Coding**
+- [x] Day 1-3 (`coding/problem_list.md`)
+- [ ] Day 4 onward, ~3-4x/week pace (not literally daily) — pattern-focused first, timed 25-35 min/problem once warmed up
+- [ ] 1-2 full mock coding interviews before 7/6
+
+**K8s knowledge** (straight K8s — no AI/ML content here)
+- [x] Control plane architecture: API server, etcd, scheduler, controller-manager (`domain_knowledge/k8s_course_notes.md`)
 - [ ] Node components: kubelet, kube-proxy, container runtime, pod lifecycle
-- [ ] etcd basics: data model, watch mechanism, how API server uses it
-
-### AI/ML Infra (2 sessions)
-- [ ] Inventory current inference-system experience — write up what you've built
-- [ ] GPU memory math: model size, activation memory, KV cache sizing
-- [ ] Intro: data parallelism vs model parallelism (tensor vs pipeline)
-
-### System Design (1 session, weekend)
-- [ ] Review framework/approach for Google-style design interviews
-- [ ] 1 warm-up design problem to gauge current level
-
-### Behavioral (1 session, weekend)
-- [ ] Brainstorm 6-8 STAR stories: leadership, conflict, ambiguity, technical decisions, failure/learning, customer focus, mentorship, cross-team collaboration
-
----
-
-## Week 2 (Jun 17 - Jun 23): Deep Dives
-
-### Coding (daily, timed 25-35 min/problem)
-- [ ] Graphs: BFS/DFS, topological sort, Union-Find
-- [ ] DP: 2D, knapsack patterns
-- [ ] Heaps/Priority Queues, Greedy
-- [ ] +1 OOD/class-design problem per day (see `coding/problem_list.md` — OOD track)
-- [ ] 1 mock coding interview (end of week)
-
-### K8s (2-3 sessions)
-- [ ] etcd deep dive: Raft basics, watch/revision model, performance tuning, failure modes (disk latency, defrag, quorum loss)
-- [ ] Controller pattern: reconciliation loops, informers/listers/workqueues, operators
-- [ ] Debugging toolkit: kubectl debug, crictl, common failure scenarios (CrashLoopBackOff, OOMKilled, pending pods)
-
-### AI/ML Infra (2 sessions)
-- [ ] Multi-GPU parallelism deep dive: tensor/pipeline parallelism, ZeRO/FSDP
-- [ ] Inference-side: tensor-parallel serving (vLLM/TensorRT-LLM), continuous batching, KV cache management
-- [ ] GKE + AI/ML: GPU/TPU node pools, device plugins, multi-host (JobSet, LeaderWorkerSet)
-
-### System Design (1 session)
-- [ ] 1 full design problem (infra/cloud-relevant), mock + feedback
-
-### Behavioral (1 session)
-- [ ] Practice delivering 3-4 stories, refine STAR structure
-
----
-
-## Week 3 (Jun 24 - Jun 30): Mock Interviews & Integration
-
-### Coding (daily, timed)
-- [ ] Mixed-topic mediums + occasional hard
-- [ ] +1 OOD/class-design problem per day (see `coding/problem_list.md` — OOD track)
-- [ ] 2 mock coding interviews
-
-### K8s (2 sessions)
+- [ ] etcd deep dive: Raft/quorum (done via quiz 6/21), watch/revision model, failure modes
+- [ ] Debugging toolkit: kubectl debug, crictl, CrashLoopBackOff/OOMKilled/Pending scenarios
 - [ ] GKE-specific: Autopilot vs Standard, autoscaling (CA/HPA/VPA), networking (VPC-native, Workload Identity, Gateway API)
-- [ ] Mock K8s context interview — scenario-based debugging
+- [ ] Build "depth-ready" inventory of past K8s/infra projects for the experience-style framing of this round
 
-### AI/ML Infra (1-2 sessions)
-- [ ] Practice "shard a large LLM across GPUs" question + variants
-- [ ] End-to-end: architect an AI/ML workload on GKE
+**System Design** (also covers AI/ML Infra content + MaaS overlap)
+- [ ] Review framework/approach for Google-style design interviews
+- [ ] 1-2 full mock design problems (infra/cloud-relevant)
+- [ ] ≥1 mock including AI/ML-on-GKE or MaaS-flavored prompt (`../cloud-ai-maas/design/maas_design_topics.md`) — covers multi-GPU sharding, GPU/TPU node pools, KV cache, serving frameworks as content within the design discussion, not as standalone study
 
-### System Design (1-2 sessions)
-- [ ] 1-2 more designs, mock + feedback
-- [ ] Include ≥1 MaaS-flavored design prompt from `../cloud-ai-maas/design/maas_design_topics.md`
-
-### Behavioral (1 session)
-- [ ] Full mock behavioral interview
-
----
-
-## Week 4 (Jul 1 - Jul 5): Polish & Final Mocks
-- [ ] Full mock loop simulation (all 5 interview types)
-- [ ] Targeted review of weak spots from mocks
-- [ ] Taper down — light review only by Jul 4-5, avoid burnout
+**Behavioral**
+- [ ] Brainstorm 6-8 STAR stories: leadership, conflict, ambiguity, technical decisions, failure/learning, customer focus, mentorship, cross-team collaboration
+- [ ] 1 full mock behavioral interview
 
 ---
 
