@@ -83,6 +83,36 @@ class Solution:
         return result
 
 
+class Solution2:
+    """Iterative DFS using an explicit stack.
+
+    Each stack frame carries (visited_set, current_path) — the exact state
+    that lives in a recursive call frame. Key rule: use new_visited and
+    new_candidate inside the for loop so each branch gets its own copy,
+    not a shared mutated version (the common bug is reassigning visited/
+    candidate in the loop, which corrupts subsequent iterations).
+    """
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        result = []
+        # stack: (visited indices, current path)
+        stack = [(set(), [])]
+
+        while stack:
+            visited, current = stack.pop()
+
+            if len(current) == len(nums):
+                result.append(current)
+                continue
+
+            for i in range(len(nums)):
+                if i not in visited:
+                    new_visited = visited | {i}          # new set, original preserved
+                    new_current = current + [nums[i]]    # new list, original preserved
+                    stack.append((new_visited, new_current))
+
+        return result
+
+
 if __name__ == "__main__":
     sol = Solution()
     print(sol.permute([1, 2, 3]))
